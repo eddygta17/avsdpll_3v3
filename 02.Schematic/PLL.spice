@@ -1,0 +1,158 @@
+* C:\users\abel\My Documents\PDF\PLL_New.asc
+V1 5MHz 0 PULSE(0 1.8 10p 10p 10p 100n 200n)
+V2 F-in 0 PULSE(0 1.8 10p 10p 10p 50n 100n)
+V3 12MHz 0 PULSE(0 1.8 10p 10p 10p 41n 83n)
+V4 VDD 0 1.8
+XX1 N003 F-in 0 VDD N002 N001 z_pdf
+XX2 N002 0 N001 VDD vco-in charge_pump
+C2 vco-in 0 100p
+R1 vco-in P001 10k
+C1 P001 0 1000p
+XX5 0 F-0ut VDD N005 z_div2
+XX3 0 vco-in VDD F-0ut vco_19_18
+XX4 0 N005 VDD N004 z_div2
+XX6 0 N004 VDD N003 z_div2
+
+* block symbol definitions
+.subckt z_pdf CLOCK_IN CLOCK_REF GND VDD DOWN UP
+XX1 GND CLOCK_IN VDD N007 inv_1
+XX2 N006 N007 GND VDD C nand_2
+XX3 C N010 GND VDD D nand_2
+XX4 D RESET GND VDD N010 nand_2
+XX5 GND C VDD N008 inv_1
+XX6 GND N008 VDD N009 inv_1
+XX7 N009 D RESET GND VDD N006 nand_3
+XX8 GND N006 VDD DOWN inv_1
+XX9 GND CLOCK_REF VDD N002 inv_1
+XX10 N001 N002 GND VDD B nand_2
+XX11 B N005 GND VDD A nand_2
+XX12 A RESET GND VDD N005 nand_2
+XX13 GND B VDD N003 inv_1
+XX14 GND N003 VDD N004 inv_1
+XX15 N004 A RESET GND VDD N001 nand_3
+XX16 GND N001 VDD UP inv_1
+XX17 A B C D GND VDD RESET nand_4
+.include osu018.lib
+.ends z_pdf
+
+.subckt charge_pump Down GND UP VDD CP
+M7 UP_bar UP GND GND nfet l=180n w=180n
+M8 DOWN_bar Down GND GND nfet l=180n w=180n
+M12 VDD Down DOWN_bar VDD pfet l=180n w=540n
+M14 VDD UP UP_bar VDD pfet l=0.18u w=0.54u
+M15 UP_bar GND N001 N001 nfet l=180n w=180n
+M16 DOWN_bar GND N004 N004 nfet l=180n w=180n
+M17 N003 N004 N003 N003 nfet l=180n w=180n
+M18 GND VDD VDD GND nfet l=180n w=180n
+M19 CP VDD N003 N003 nfet l=180n w=180n
+M20 N003 Down GND GND nfet l=180n w=15u
+M21 N001 VDD UP_bar N001 pfet l=180n w=540n
+M22 N004 VDD DOWN_bar N004 pfet l=180n w=540n
+M23 N002 UP N002 N002 pfet l=180n w=540n
+M24 GND GND VDD VDD pfet l=180n w=540n
+M25 N002 GND CP N002 pfet l=180n w=540n
+M26 VDD N001 N002 VDD pfet l=180n w=45u
+.lib osu018.lib
+.ends charge_pump
+
+.subckt z_div2 GND IN VDD OUTBY2
+M3 N002 OUTBY2 VDD VDD pfet l=0.18u w=0.54u
+M11 N001 N003 N004 0 nfet l=0.18u w=0.27u
+M1 N003 IN N002 VDD pfet l=0.18u w=0.54u
+M5 N001 IN VDD VDD pfet l=0.18u w=0.54u
+M6 OUTBY2 N001 VDD VDD pfet l=0.18u w=0.54u
+M7 N003 OUTBY2 GND 0 nfet l=0.18u w=0.27u
+M2 N004 IN 0 0 nfet l=0.18u w=0.27u
+M4 N005 N001 0 0 nfet l=0.18u w=0.27u
+M8 OUTBY2 IN N005 0 nfet l=0.18u w=0.27u
+.include osu018.lib
+.ends z_div2
+
+.subckt vco_19_18 GND VCO_In VDD Vout_OSC
+M7 Vp VCO_In N012 0 nfet l=0.18u w=0.27u
+M8 Vp Vp VDD VDD pfet l=0.18u w=0.54u
+XU1 osc_fb N013 Vp Vn VDD 0 cs_inv
+XU2 N013 N014 Vp Vn VDD 0 cs_inv
+XU3 N014 N015 Vp Vn VDD 0 cs_inv
+XU4 N015 N016 Vp Vn VDD 0 cs_inv
+XU5 N016 N017 Vp Vn VDD 0 cs_inv
+XU6 N017 n1 Vp Vn VDD 0 cs_inv
+XU19 n3 N001 Vp Vn VDD 0 cs_inv
+XU22 osc_fb Vout_OSC VDD 0 inv_20_10
+M1 Vn Vn 0 0 nfet l=0.18u w=0.27u
+M2 Vn Vp VDD VDD pfet l=0.18u w=0.54u
+R1 N012 GND 10k
+XU7 n1 N007 Vp Vn VDD 0 cs_inv
+XU8 N007 N008 Vp Vn VDD 0 cs_inv
+XU9 N008 N009 Vp Vn VDD 0 cs_inv
+XU10 N009 N010 Vp Vn VDD 0 cs_inv
+XU11 N010 N011 Vp Vn VDD 0 cs_inv
+XU12 N011 n2 Vp Vn VDD 0 cs_inv
+XU13 n2 N002 Vp Vn VDD 0 cs_inv
+XU14 N002 N003 Vp Vn VDD 0 cs_inv
+XU15 N003 N004 Vp Vn VDD 0 cs_inv
+XU16 N004 N005 Vp Vn VDD 0 cs_inv
+XU17 N005 N006 Vp Vn VDD 0 cs_inv
+XU18 N006 n3 Vp Vn VDD 0 cs_inv
+XU20 N001 P001 Vp Vn VDD 0 cs_inv
+XU21 P001 osc_fb Vp Vn VDD 0 cs_inv
+.include osu018.lib
+.ends vco_19_18
+
+.subckt inv_1 GND In VDD Out
+M1 Out In GND GND nfet l=0.18u w=0.27u
+M2 Out In VDD VDD pfet l=0.18u w=0.54u
+.include osu018.lib
+.ends inv_1
+
+.subckt nand_2 A B GND VDD Out
+M3 Out B VDD VDD pfet l=0.18u w=0.54u
+M8 Out A VDD VDD pfet l=0.18u w=0.54u
+M11 N001 B GND 0 nfet l=0.18u w=0.27u
+M12 Out A N001 0 nfet l=0.18u w=0.27u
+.include osu018.lib
+.ends nand_2
+
+.subckt nand_3 A B C GND VDD Out
+M3 Out B VDD VDD pfet l=0.18u w=0.54u
+M7 Out C VDD VDD pfet l=0.18u w=0.54u
+M8 Out A VDD VDD pfet l=0.18u w=0.54u
+M10 N002 C GND 0 nfet l=0.18u w=0.27u
+M11 N001 B N002 0 nfet l=0.18u w=0.27u
+M12 Out A N001 0 nfet l=0.18u w=0.27u
+.include osu018.lib
+.ends nand_3
+
+.subckt nand_4 A B C D GND VDD out
+M8 out A VDD VDD pfet l=0.18u w=0.54u
+M12 out A N001 0 nfet l=0.18u w=0.27u
+M1 out B VDD VDD pfet l=0.18u w=0.54u
+M2 out C VDD VDD pfet l=0.18u w=0.54u
+M3 out D VDD VDD pfet l=0.18u w=0.54u
+M4 N001 B N002 0 nfet l=0.18u w=0.27u
+M5 N002 C N003 0 nfet l=0.18u w=0.27u
+M6 N003 D GND 0 nfet l=0.18u w=0.27u
+.include osu018.lib
+.ends nand_4
+
+.subckt cs_inv In Out Vp Vn VDD GND
+M1 N002 Vn GND 0 nfet l=0.18u w=0.27u
+M4 N001 Vp VDD VDD pfet l=0.18u w=0.54u
+M3 Out In N001 VDD pfet l=0.18u w=0.54u
+M2 Out In N002 0 nfet l=0.18u w=0.27u
+C1 Out 0 2f
+.include osu018.lib
+.ends cs_inv
+
+.subckt inv_20_10 In Out VDD GND
+M1 Out In GND GND nfet l=0.18u w=0.27u
+M2 Out In VDD VDD pfet l=0.18u w=0.54u
+.ends inv_20_10
+
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\users\abel\My Documents\LTspiceXVII\lib\cmp\standard.mos
+.tran 0 16u 10u
+.include osu018.lib
+.backanno
+.end

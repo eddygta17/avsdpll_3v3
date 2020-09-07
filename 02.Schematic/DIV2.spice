@@ -1,0 +1,16 @@
+* Z:\home\abel\Desktop\VSD\abel_PLL\02.Schematic\ii.DIV2\DIV2.asc
+M3 N002 OUTBY2 VDD VDD pfet l=0.18u w=0.54u
+M11 N001 N003 N004 0 nfet l=0.18u w=0.27u
+M1 N003 IN N002 VDD pfet l=0.18u w=0.54u
+M5 N001 IN VDD VDD pfet l=0.18u w=0.54u
+M6 OUTBY2 N001 VDD VDD pfet l=0.18u w=0.54u
+M7 N003 OUTBY2 0 0 nfet l=0.18u w=0.27u
+M2 N004 IN 0 0 nfet l=0.18u w=0.27u
+M4 N005 N001 0 0 nfet l=0.18u w=0.27u
+M8 OUTBY2 IN N005 0 nfet l=0.18u w=0.27u
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\users\abel\My Documents\LTspiceXVII\lib\cmp\standard.mos
+.include osu018.lib
+.backanno
+.end

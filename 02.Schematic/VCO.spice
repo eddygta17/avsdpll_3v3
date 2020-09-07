@@ -1,0 +1,50 @@
+* Z:\home\abel\Desktop\VSD\abel_PLL\02.Schematic\iii.VCO\Z_VCO.asc
+M7 Vp VCO_In N012 0 nfet l=0.18u w=0.27u
+M8 Vp Vp VDD VDD pfet l=0.18u w=0.54u
+XU1 osc_fb N013 Vp Vn VDD 0 cs_inv
+XU2 N013 N014 Vp Vn VDD 0 cs_inv
+XU3 N014 N015 Vp Vn VDD 0 cs_inv
+XU4 N015 N016 Vp Vn VDD 0 cs_inv
+XU5 N016 N017 Vp Vn VDD 0 cs_inv
+XU6 N017 n1 Vp Vn VDD 0 cs_inv
+XU19 n3 N001 Vp Vn VDD 0 cs_inv
+XU22 osc_fb Vout_OSC VDD 0 inv_20_10
+M1 Vn Vn 0 0 nfet l=0.18u w=0.27u
+M2 Vn Vp VDD VDD pfet l=0.18u w=0.54u
+R1 N012 0 10k
+XU7 n1 N007 Vp Vn VDD 0 cs_inv
+XU8 N007 N008 Vp Vn VDD 0 cs_inv
+XU9 N008 N009 Vp Vn VDD 0 cs_inv
+XU10 N009 N010 Vp Vn VDD 0 cs_inv
+XU11 N010 N011 Vp Vn VDD 0 cs_inv
+XU12 N011 n2 Vp Vn VDD 0 cs_inv
+XU13 n2 N002 Vp Vn VDD 0 cs_inv
+XU14 N002 N003 Vp Vn VDD 0 cs_inv
+XU15 N003 N004 Vp Vn VDD 0 cs_inv
+XU16 N004 N005 Vp Vn VDD 0 cs_inv
+XU17 N005 N006 Vp Vn VDD 0 cs_inv
+XU18 N006 n3 Vp Vn VDD 0 cs_inv
+XU20 N001 P001 Vp Vn VDD 0 cs_inv
+XU21 P001 osc_fb Vp Vn VDD 0 cs_inv
+
+* block symbol definitions
+.subckt cs_inv In Out Vp Vn VDD GND
+M1 N002 Vn GND 0 nfet l=0.18u w=0.27u
+M4 N001 Vp VDD VDD pfet l=0.18u w=0.54u
+M3 Out In N001 VDD pfet l=0.18u w=0.54u
+M2 Out In N002 0 nfet l=0.18u w=0.27u
+C1 Out 0 2f
+.include osu018.lib
+.ends cs_inv
+
+.subckt inv_20_10 In Out VDD GND
+M1 Out In GND GND nfet l=0.18u w=0.27u
+M2 Out In VDD VDD pfet l=0.18u w=0.54u
+.ends inv_20_10
+
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\users\abel\My Documents\LTspiceXVII\lib\cmp\standard.mos
+.include osu018.lib
+.backanno
+.end

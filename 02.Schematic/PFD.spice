@@ -1,0 +1,62 @@
+* Z:\home\abel\Desktop\VSD\abel_PLL\02.Schematic\i.PFD\PFD.asc
+XX1 0 CLOCK_IN VDD N007 inv_1
+XX2 N006 N007 0 VDD C nand_2
+XX3 C N010 0 VDD D nand_2
+XX4 D RESET 0 VDD N010 nand_2
+XX5 0 C VDD N008 inv_1
+XX6 0 N008 VDD N009 inv_1
+XX7 N009 D RESET 0 VDD N006 nand_3
+XX8 0 N006 VDD DOWN inv_1
+XX9 0 CLOCK_REF VDD N002 inv_1
+XX10 N001 N002 0 VDD B nand_2
+XX11 B N005 0 VDD A nand_2
+XX12 A RESET 0 VDD N005 nand_2
+XX13 0 B VDD N003 inv_1
+XX14 0 N003 VDD N004 inv_1
+XX15 N004 A RESET 0 VDD N001 nand_3
+XX16 0 N001 VDD UP inv_1
+XX17 A B C D 0 VDD RESET nand_4
+
+* block symbol definitions
+.subckt inv_1 GND In VDD Out
+M1 Out In GND GND nfet l=0.18u w=0.27u
+M2 Out In VDD VDD pfet l=0.18u w=0.54u
+.include osu018.lib
+.ends inv_1
+
+.subckt nand_2 A B GND VDD Out
+M3 Out B VDD VDD pfet l=0.18u w=0.54u
+M8 Out A VDD VDD pfet l=0.18u w=0.54u
+M11 N001 B GND 0 nfet l=0.18u w=0.27u
+M12 Out A N001 0 nfet l=0.18u w=0.27u
+.include osu018.lib
+.ends nand_2
+
+.subckt nand_3 A B C GND VDD Out
+M3 Out B VDD VDD pfet l=0.18u w=0.54u
+M7 Out C VDD VDD pfet l=0.18u w=0.54u
+M8 Out A VDD VDD pfet l=0.18u w=0.54u
+M10 N002 C GND 0 nfet l=0.18u w=0.27u
+M11 N001 B N002 0 nfet l=0.18u w=0.27u
+M12 Out A N001 0 nfet l=0.18u w=0.27u
+.include osu018.lib
+.ends nand_3
+
+.subckt nand_4 A B C D GND VDD out
+M8 out A VDD VDD pfet l=0.18u w=0.54u
+M12 out A N001 0 nfet l=0.18u w=0.27u
+M1 out B VDD VDD pfet l=0.18u w=0.54u
+M2 out C VDD VDD pfet l=0.18u w=0.54u
+M3 out D VDD VDD pfet l=0.18u w=0.54u
+M4 N001 B N002 0 nfet l=0.18u w=0.27u
+M5 N002 C N003 0 nfet l=0.18u w=0.27u
+M6 N003 D GND 0 nfet l=0.18u w=0.27u
+.include osu018.lib
+.ends nand_4
+
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\users\abel\My Documents\LTspiceXVII\lib\cmp\standard.mos
+.include osu018.lib
+.backanno
+.end

@@ -1,0 +1,21 @@
+* C:\users\abel\my documents\pdf\charge_pump.asc
+
+.subckt charge_pump Down GND UP VDD CP
+M7 UP_bar UP GND GND nfet l=180n w=180n
+M8 DOWN_bar Down GND GND nfet l=180n w=180n
+M12 VDD Down DOWN_bar VDD pfet l=180n w=540n
+M14 VDD UP UP_bar VDD pfet l=0.18u w=0.54u
+M15 UP_bar GND N001 N001 nfet l=180n w=180n
+M16 DOWN_bar GND N004 N004 nfet l=180n w=180n
+M17 N003 N004 N003 N003 nfet l=180n w=180n
+M18 GND VDD VDD GND nfet l=180n w=180n
+M19 CP VDD N003 N003 nfet l=180n w=180n
+M20 N003 Down GND GND nfet l=180n w=15u
+M21 N001 VDD UP_bar N001 pfet l=180n w=540n
+M22 N004 VDD DOWN_bar N004 pfet l=180n w=540n
+M23 N002 UP N002 N002 pfet l=180n w=540n
+M24 GND GND VDD VDD pfet l=180n w=540n
+M25 N002 GND CP N002 pfet l=180n w=540n
+M26 VDD N001 N002 VDD pfet l=180n w=45u
+.lib osu018.lib
+.ends charge_pump
