@@ -21,8 +21,8 @@ This repository hosts relevant files on the IP.
 ## 1. Contents
 00. [Specifications](https://github.com/eddygta17/avsdpll_3v3/tree/master/00.Specifications) - Specifications provided for the PLL.
 01. [Reports](https://github.com/eddygta17/avsdpll_3v3/tree/master/01.Reports) - Reports and presentations.
-02. [Schematic](https://github.com/eddygta17/avsdpll_3v3/tree/master/02.Schematic) - Schematic of different components.
-03. [Layout](https://github.com/eddygta17/avsdpll_3v3/tree/master/03.Layout) - Layout of different components.
+02. [Schematic](https://github.com/eddygta17/avsdpll_3v3/tree/master/02.Schematic) - Schematic of different blocks.
+03. [Layout](https://github.com/eddygta17/avsdpll_3v3/tree/master/03.Layout) - Layout of different blocks.
 04. [Misc](https://github.com/eddygta17/avsdpll_3v3/tree/master/04.Misc) - Images
 
 ## 2. Pre-layout Simulation of PLL 
