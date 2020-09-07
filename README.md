@@ -3,7 +3,7 @@
 
 ### Specifications
     - ClockIn  5MHz  to 10MHz  at 1.8v
-    - ClockOut 40MHz to 80MHz at 1.8v
+    - ClockOut 40MHz to 80MHz  at 1.8v
     - 8x multiplication
 | Parameter | Description                      | min  | typ | max  | Unit | Condition                                                                            |
 |-----------|----------------------------------|------|-----|------|------|--------------------------------------------------------------------------------------|
