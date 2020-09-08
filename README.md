@@ -10,9 +10,7 @@
 | VDD       | Digital supply voltage           |      | 1.8  |       | V    | T=-40 to 150C                                                                        |
 | FCLKREF   | Reference clock frequency        | 5    | 10   | 12.5  | MHz  |                                                                                      |
 | FCLKOUT   | Output clock frequency           | 41.6 | 79.1 | 99.82 | MHz  | PLL mode, T=27C, VDD=1.8                                                             |
-| FCLKOUT   | Output clock frequency           | 6    |      | 251   | MHz  | VCO mode, T=27C, VDD=1.8                                                             |
 | DC        | Duty Cycle                       | 50.8 | 52.4 | 53.7  | %    | T=-40 to 150C                                                                        |
-| VVCO      | Oscillator control input voltage | 0.5  |      | 1.2   | V    |                                                                                      |
 | TSET      | Settling time                    | 3.8  | 8    | 8     | us   | start from EN_CP and report 2 values; one at FCLKOUT=40MHz and one at FCLKOUT=100MHz |
 
 This repository hosts relevant files on the IP.
